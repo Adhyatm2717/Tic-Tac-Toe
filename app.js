@@ -1,5 +1,8 @@
 let boxes = document.querySelectorAll(".box")
 let resetBtn = document.querySelector("#reset-Btn")
+let newGameBtn = document.querySelector("#newBtn") 
+let msgContainer = document.querySelector(".msg-container")
+let msg = document.querySelector('#msg')
 
 let turnO = true    //playerO
 
@@ -13,9 +16,44 @@ const winPatterns = [
     [3,4,5],
     [6,7,8]
 ]
+
+let count = 0
+const gameDraw = ()=>{
+    msg.innerText = `Game Draw!`
+    msgContainer.classList.remove("hide")
+    disbaleBoxes()
+}
+const resetGame = ()=>{
+    turnO =true
+    enableBoxes()
+    msgContainer.classList.add("hide")
+    count = 0
+
+}
+const enableBoxes= ()=>{
+    for (let box of boxes){
+        box.disabled = false
+        box.innerText = ""
+    }
+}
+const disbaleBoxes = ()=>{
+    for (let box of boxes){
+        box.disabled = true
+    }
+}
+const showWinner = (winner)=>{
+    msg.innerText = `Congratulations, Winner is ${winner}`
+    msgContainer.classList.remove("hide")
+    disbaleBoxes()
+}
 boxes.forEach((box)=>{
     box.addEventListener("click", ()=>{
         console.log("i'm clicked")
+        count ++
+        if (count === 9){
+            gameDraw()
+        }
+        console.log(count)
         if(turnO){
             box.innerText = "O"
             turnO =false
@@ -37,9 +75,14 @@ const checkWinnwer = ()=>{
 
         if (pos1Val != "" && pos2Val != "" && pos3Val != "") {
             if (pos1Val === pos2Val && pos2Val === pos3Val){
-                console.log(`Winner ${pos1Val}`)
+                // console.log(`Winner ${pos1Val}`)
+            
+                let winner = pos1Val
+                showWinner(winner)
             }
         }
     }
 
 }  
+newGameBtn.addEventListener("click",resetGame)
+resetBtn.addEventListener("click",resetGame)
