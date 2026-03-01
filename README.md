@@ -4,7 +4,7 @@ A classic Tic Tac Toe game built using HTML, CSS, and JavaScript. This project a
 
 ## Demo
 
-[Link to Live Demo (Add link here)](#)
+[Link to Live Demo](https://amxo.netlify.app/)
 
 ## Features
 
